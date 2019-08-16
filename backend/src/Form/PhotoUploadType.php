@@ -20,7 +20,11 @@ class PhotoUploadType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            // Configure your form options here
         ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return null;
     }
 }
