@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  nginx:
+    build: ./docker/nginx/
+    depends_on:
+      - php
+    volumes:
+      - ./backend:/var/www/app:cached
+    ports:
+      - 8080:80
+
+  php:
+    build: ./docker/php/
+    volumes:
+      - ./backend:/var/www/app:cached
+    working_dir: /var/www/app
+    environment:
+      DATABASE_URL: pgsql://photoshare:photoshare@postgres:5432/photoshare
+
+  postgres:
+    image: postgres:11.5-alpine
+    environment:
+      POSTGRES_USER: photoshare
+      POSTGRES_PASSWORD: photoshare
+      POSTGRES_DB: photoshare
