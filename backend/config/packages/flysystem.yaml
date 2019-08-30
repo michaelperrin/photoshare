@@ -1,0 +1,9 @@
+# Read the documentation at https://github.com/thephpleague/flysystem-bundle/blob/master/docs/1-getting-started.md
+flysystem:
+    storages:
+        photo.storage:
+            adapter: 'aws'
+            options:
+                bucket: 'photoshare'
+                client: 'Aws\S3\S3Client' # The service ID of the Aws\S3\S3Client instance
+

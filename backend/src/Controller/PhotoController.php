@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Form\PhotoUploadType;
+use App\Service\Uploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,12 +19,16 @@ class PhotoController extends AbstractController
     /**
      * @Route("/upload", name="upload", methods={"POST"})
      */
-    public function upload(Request $request): JsonResponse
+    public function upload(Request $request, Uploader $uploader): JsonResponse
     {
         $form = $this->createForm(PhotoUploadType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form['file']->getData();
+
+            $newFilename = $uploader->uploadPhoto($uploadedFile);
             return new JsonResponse(['ok' => true], 201);
         }
 
