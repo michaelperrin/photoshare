@@ -72,8 +72,10 @@ class Upload extends Component {
 
       const formData = new FormData();
       formData.append("file", file, file.name);
+      formData.append("author", 'Michael');
+      formData.append("album_hash", '5fda2f');
 
-      req.open("POST", "https://localhost:8000/photo/upload");
+      req.open("POST", "http://localhost:8000/photo/upload");
       req.send(formData);
     });
   }
