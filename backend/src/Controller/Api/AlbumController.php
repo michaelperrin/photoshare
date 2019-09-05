@@ -15,24 +15,21 @@ use Symfony\Component\Serializer\SerializerInterface;
 class AlbumController
 {
     /**
-     * @Route("/{hash}/pictures", name="pictures", methods={"GET"})
+     * @Route("/{hash}", name="pictures", methods={"GET"})
      */
-    public function pictures(
+    public function index(
         AlbumRepository $albumRepository,
-        PictureRepository $pictureRepository,
         SerializerInterface $serializer,
         string $hash
     ): JsonResponse {
-        $album = $albumRepository->findOneBy(['hash' => $hash]);
+        $album = $albumRepository->findOneByHashWithPictures($hash);
 
         if (!$album) {
             throw new NotFoundHttpException('Album not found');
         }
 
-        $pictures = $pictureRepository->findBy(['album' => $album]);
-
         $json = $serializer->serialize(
-            $pictures,
+            $album,
             'json',
             ['groups' => 'api_pictures_list']
         );
