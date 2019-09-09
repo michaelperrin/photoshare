@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Upload from "./upload/Upload";
+import Album from "./containers/Album";
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
       <div className="App">
         <div className="Card">
           <Upload />
+          <Album />
         </div>
       </div>
     );
