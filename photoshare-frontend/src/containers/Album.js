@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import AlbumComponent from '../components/Album';
 import { fetchAlbum } from '../actions/album';
@@ -10,16 +10,16 @@ const Album = ({ isFetching, album, fetchAlbum }) => {
 
   return (
     <AlbumComponent isFetching={isFetching} album={album} />
-  )
+  );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isFetching: state.album.isFetching,
   album: state.album.data,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchAlbum: hash => dispatch(fetchAlbum(hash)),
+const mapDispatchToProps = (dispatch) => ({
+  fetchAlbum: (hash) => dispatch(fetchAlbum(hash)),
 });
 
 export default connect(

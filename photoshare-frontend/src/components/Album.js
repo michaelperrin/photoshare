@@ -11,7 +11,7 @@ const Album = ({ album, isFetching }) => {
       {album.hash}
 
       <div>
-        {album.pictures.map(picture => (
+        {album.pictures.map((picture) => (
           <div key={picture.id}>{picture.id}</div>
         ))}
       </div>

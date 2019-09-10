@@ -7,7 +7,7 @@ export function requestAlbum() {
   return {
     type: REQUEST_ALBUM,
   };
-};
+}
 
 export function receiveAlbum(data) {
   return {
@@ -15,7 +15,7 @@ export function receiveAlbum(data) {
     data,
     receivedAt: Date.now(),
   };
-};
+}
 
 export function fetchAlbum(hash) {
   return (dispatch) => {
@@ -23,12 +23,9 @@ export function fetchAlbum(hash) {
 
     return fetch(`http://localhost:8000/api/album/${hash}`)
       .then(
-        response => response.json(),
-        error => console.log('An error occurred.', error)
+        (response) => response.json(),
+        (error) => console.log('An error occurred.', error),
       )
-      .then(json =>
-        dispatch(receiveAlbum(json))
-      )
-    ;
+      .then((json) => dispatch(receiveAlbum(json)));
   };
-};
+}
