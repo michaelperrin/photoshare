@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import Upload from './upload/Upload';
-import Album from './containers/Album';
+import AlbumPage from './containers/AlbumPage';
 
 const App = () => (
   <div className="App">
-    <div className="Card">
-      <Upload />
-      <Album />
+    <div className="container">
+      <div className="Card">
+        <AlbumPage />
+      </div>
     </div>
   </div>
 );

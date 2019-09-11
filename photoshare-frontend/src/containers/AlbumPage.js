@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import AlbumComponent from '../components/Album';
+import Album from '../components/Album/index';
 import { fetchAlbum } from '../actions/album';
+import Upload from '../components/upload/Upload';
 
-const Album = ({ isFetching, album, fetchAlbum }) => {
+const AlbumPage = ({ isFetching, album, fetchAlbum }) => {
   useEffect(() => {
     fetchAlbum('5fda2f');
   }, []);
 
   return (
-    <AlbumComponent isFetching={isFetching} album={album} />
+    <div>
+      {/* <Upload /> */}
+      <Album isFetching={isFetching} album={album} />
+    </div>
   );
 };
 
@@ -25,4 +29,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Album);
+)(AlbumPage);
