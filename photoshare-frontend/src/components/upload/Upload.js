@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from 'react-modal';
 import Dropzone from '../dropzone/Dropzone';
 import './Upload.css';
 import Progress from '../progress/Progress';
@@ -10,7 +11,7 @@ class Upload extends Component {
       files: [],
       uploading: false,
       uploadProgress: {},
-      successfullUploaded: false,
+      successfulUpload: false,
     };
 
     this.onFilesAdded = this.onFilesAdded.bind(this);
@@ -34,10 +35,10 @@ class Upload extends Component {
     try {
       await Promise.all(promises);
 
-      this.setState({ successfullUploaded: true, uploading: false });
+      this.setState({ successfulUpload: true, uploading: false });
     } catch (e) {
       // Not Production ready! Do some error handling here instead...
-      this.setState({ successfullUploaded: true, uploading: false });
+      this.setState({ successfulUpload: true, uploading: false });
     }
   }
 
@@ -82,7 +83,7 @@ class Upload extends Component {
 
   renderProgress(file) {
     const uploadProgress = this.state.uploadProgress[file.name];
-    if (this.state.uploading || this.state.successfullUploaded) {
+    if (this.state.uploading || this.state.successfulUpload) {
       return (
         <div className="ProgressWrapper">
           <Progress progress={uploadProgress ? uploadProgress.percentage : 0} />
@@ -101,10 +102,10 @@ class Upload extends Component {
   }
 
   renderActions() {
-    if (this.state.successfullUploaded) {
+    if (this.state.successfulUpload) {
       return (
         <button
-          onClick={() => this.setState({ files: [], successfullUploaded: false })}
+          onClick={() => this.setState({ files: [], successfulUpload: false })}
         >
           Clear
         </button>
@@ -123,24 +124,34 @@ class Upload extends Component {
   render() {
     return (
       <div className="Upload">
-        <span className="Title">Upload Files</span>
-        <div className="Content">
-          <div>
-            <Dropzone
-              onFilesAdded={this.onFilesAdded}
-              disabled={this.state.uploading || this.state.successfullUploaded}
-            />
+        <button onClick={this.props.handleShowUploader}>Ajouter des photos à l'album</button>
+
+        <Modal
+          isOpen={this.props.showUploader}
+          contentLabel="onRequestClose Example"
+          onRequestClose={this.props.handleHideUploader}
+          shouldCloseOnOverlayClick
+        >
+          <div className="Content">
+            <div>
+              <Dropzone
+                onFilesAdded={this.onFilesAdded}
+                disabled={this.state.uploading || this.state.successfulUpload}
+              />
+            </div>
+            <div className="Files">
+              {this.state.files.map((file) => (
+                <div key={file.name} className="Row">
+                  <span className="Filename">{file.name}</span>
+                  {this.renderProgress(file)}
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="Files">
-            {this.state.files.map((file) => (
-              <div key={file.name} className="Row">
-                <span className="Filename">{file.name}</span>
-                {this.renderProgress(file)}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="Actions">{this.renderActions()}</div>
+          <div className="Actions">{this.renderActions()}</div>
+
+          <button onClick={this.props.handleHideUploader}>Close Modal</button>
+        </Modal>
       </div>
     );
   }

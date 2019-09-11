@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Album from '../components/Album/index';
 import { fetchAlbum } from '../actions/album';
-import Upload from '../components/upload/Upload';
+import Uploader from './Uploader';
 
 const AlbumPage = ({ isFetching, album, fetchAlbum }) => {
   useEffect(() => {
     fetchAlbum('5fda2f');
-  }, []);
+  }, [fetchAlbum]);
 
   return (
     <div>
-      {/* <Upload /> */}
+      <Uploader />
       <Album isFetching={isFetching} album={album} />
     </div>
   );
