@@ -4,6 +4,5 @@ flysystem:
         photo.storage:
             adapter: 'aws'
             options:
-                bucket: 'photoshare'
+                bucket: '%env(AWS_S3_PHOTOSHARE_BUCKET)%'
                 client: 'Aws\S3\S3Client' # The service ID of the Aws\S3\S3Client instance
-

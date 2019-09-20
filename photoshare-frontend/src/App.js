@@ -1,17 +1,15 @@
-import React, { Component } from "react";
-import "./App.css";
-import Upload from "./upload/Upload";
+import React from 'react';
+import './App.css';
+import AlbumPage from './containers/AlbumPage';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="Card">
-          <Upload />
-        </div>
+const App = () => (
+  <div className="App">
+    <div className="container">
+      <div className="Card">
+        <AlbumPage />
       </div>
-    );
-  }
-}
+    </div>
+  </div>
+);
 
 export default App;

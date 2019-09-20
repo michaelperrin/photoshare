@@ -18,4 +18,16 @@ class AlbumRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Album::class);
     }
+
+    public function findOneByHashWithPictures(string $hash): ?Album
+    {
+        return $this->createQueryBuilder('a')
+            ->addSelect('pictures')
+            ->innerJoin('a.pictures', 'pictures')
+            ->andWhere('a.hash = :hash')
+            ->setParameter('hash', $hash)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }
