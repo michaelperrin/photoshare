@@ -1,4 +1,7 @@
 {
+    "99designs/phumbor": {
+        "version": "1.2.2"
+    },
     "aws/aws-sdk-php": {
         "version": "3.110.6"
     },

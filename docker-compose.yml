@@ -24,3 +24,8 @@ services:
       POSTGRES_USER: photoshare
       POSTGRES_PASSWORD: photoshare
       POSTGRES_DB: photoshare
+
+  thumbor:
+    image: minimalcompact/thumbor
+    ports:
+      - 3000:80
