@@ -7,72 +7,12 @@ import Progress from '../progress/Progress';
 class Upload extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
-
-    // this.uploadFiles = this.uploadFiles.bind(this);
-    // this.sendRequest = this.sendRequest.bind(this);
     this.renderActions = this.renderActions.bind(this);
   }
 
-  // async uploadFiles() {
-  //   this.setState({ uploadProgress: {}, uploading: true });
-  //   const promises = [];
-  //   this.props.files.forEach((file) => {
-  //     promises.push(this.sendRequest(file));
-  //   });
-  //   try {
-  //     await Promise.all(promises);
-
-  //     this.setState({ successfulUpload: true, uploading: false });
-  //   } catch (e) {
-  //     // Not Production ready! Do some error handling here instead...
-  //     this.setState({ successfulUpload: true, uploading: false });
-  //   }
-  // }
-
-  // sendRequest(file) {
-  //   return new Promise((resolve, reject) => {
-  //     const req = new XMLHttpRequest();
-
-  //     req.upload.addEventListener('progress', (event) => {
-  //       if (event.lengthComputable) {
-  //         const copy = { ...this.props.uploadProgress };
-  //         copy[file.name] = {
-  //           state: 'pending',
-  //           percentage: (event.loaded / event.total) * 100,
-  //         };
-  //         this.setState({ uploadProgress: copy });
-  //       }
-  //     });
-
-  //     req.upload.addEventListener('load', (event) => {
-  //       const copy = { ...this.props.uploadProgress };
-  //       copy[file.name] = { state: 'done', percentage: 100 };
-  //       this.setState({ uploadProgress: copy });
-  //       resolve(req.response);
-  //     });
-
-  //     req.upload.addEventListener('error', (event) => {
-  //       const copy = { ...this.props.uploadProgress };
-  //       copy[file.name] = { state: 'error', percentage: 0 };
-  //       this.setState({ uploadProgress: copy });
-  //       reject(req.response);
-  //     });
-
-  //     const formData = new FormData();
-  //     formData.append('file', file, file.name);
-  //     formData.append('author', 'Michael');
-  //     formData.append('album_hash', '5fda2f');
-
-  //     req.open('POST', 'http://localhost:8000/photo/upload');
-  //     req.send(formData);
-  //   });
-  // }
-
   renderProgress(file) {
     const uploadProgress = this.props.uploadProgress[file.name];
+
     if (this.props.uploading || this.props.successfulUpload) {
       return (
         <div className="ProgressWrapper">

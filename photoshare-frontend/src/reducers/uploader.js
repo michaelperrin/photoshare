@@ -1,4 +1,11 @@
-import { SHOW_UPLOADER, HIDE_UPLOADER, ADD_FILES, START_UPLOAD } from '../actions/uploader';
+import {
+  SHOW_UPLOADER,
+  HIDE_UPLOADER,
+  ADD_FILES,
+  START_UPLOAD,
+  FINISH_UPLOAD,
+  UPDATE_UPLOAD_PROGRESS,
+} from '../actions/uploader';
 
 const defaultState = {
   show: false,
@@ -33,6 +40,25 @@ const uploader = (state = defaultState, action) => {
         ...state,
         uploadProgress: {},
         uploading: true,
+      };
+
+    case FINISH_UPLOAD:
+      return {
+        ...state,
+        uploading: false,
+        successfulUpload: true,
+      };
+
+    case UPDATE_UPLOAD_PROGRESS:
+      return {
+        ...state,
+        uploadProgress: {
+          ...state.uploadProgress,
+          [action.filename]: {
+            status: action.status,
+            percentage: action.percentage,
+          },
+        },
       };
 
     default:
