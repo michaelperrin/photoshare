@@ -35,7 +35,10 @@ class Uploader
 
         $this->photoStorage->writeStream(
             self::PHOTO_PATH . '/' . $newFilename,
-            $stream
+            $stream,
+            [
+                'ACL' => 'public-read',
+            ]
         );
 
         return $newFilename;
