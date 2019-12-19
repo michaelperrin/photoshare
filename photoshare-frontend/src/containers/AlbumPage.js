@@ -6,6 +6,7 @@ import Uploader from './Uploader';
 
 const AlbumPage = ({ isFetching, album, fetchAlbum }) => {
   useEffect(() => {
+    // TODO
     fetchAlbum('5fda2f');
   }, [fetchAlbum]);
 

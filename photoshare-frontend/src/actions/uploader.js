@@ -82,9 +82,9 @@ function sendRequest(dispatch, file) {
     const formData = new FormData();
     formData.append('file', file, file.name);
     formData.append('author', 'Michael');
-    formData.append('album_hash', '5fda2f');
+    formData.append('album_hash', '5fda2f'); // TODO
 
-    req.open('POST', 'http://localhost:8000/photo/upload');
+    req.open('POST', 'http://localhost:8000/photo/upload'); // TODO
     req.send(formData);
   });
 }
